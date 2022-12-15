@@ -23,8 +23,8 @@ function searchCountryByName() {
             countryInfo.innerHTML = '';
 
             if (countries.length === 1) {
-                countryList.insertAdjacentHTML('beforeend', renderCountryList);
-                countryInfo.insertAdjacentHTML('beforeend', renderCountryInfo);
+                countryList.insertAdjacentHTML('beforeend', renderCountryList(countries));
+                countryInfo.insertAdjacentHTML('beforeend', renderCountryInfo(countries));
                
             }
             
@@ -32,7 +32,7 @@ function searchCountryByName() {
             else if (countries.length >= 10) {
                 Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
             } else {
-                countryList.insertAdjacentHTML('beforeend', renderCountryList);
+                countryList.insertAdjacentHTML('beforeend', renderCountryList(countries));
             }
 
         })
