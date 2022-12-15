@@ -19,29 +19,22 @@ function searchCountryByName() {
 
     fetchCountries(name)
         .then((countries) => {
-            countryList.innerHTML = '';
-            countryInfo.innerHTML = '';
+            clearData()
 
             if (countries.length === 1) {
                 countryList.insertAdjacentHTML('beforeend', renderCountryList(countries));
                 countryInfo.insertAdjacentHTML('beforeend', renderCountryInfo(countries));
-               
             }
-            
-           
             else if (countries.length >= 10) {
-                Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
+                errorDataValues()
             } else {
                 countryList.insertAdjacentHTML('beforeend', renderCountryList(countries));
             }
-
         })
         .catch((Error) => {
-            countryList.innerHTML = '';
-            countryInfo.innerHTML = '';
-            Notiflix.Notify.failure('Oops, there is no country with that name')
-})
-    
+            clearData()
+            errorDataNoName()
+}) 
 }
 
 function renderCountryInfo(countries) {
@@ -67,5 +60,18 @@ function renderCountryList(countries) {
         })
         .join('');
     return markup;
+}
+
+function clearData() {
+    countryList.innerHTML = '';
+    countryInfo.innerHTML = '';
+}
+
+function errorDataValues() {
+    Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
+}
+
+function errorDataNoName() {
+    Notiflix.Notify.failure('Oops, there is no country with that name')
 }
 
